@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -49,8 +48,9 @@ namespace Discord_Custom_Status.Controllers
 
         private void UpdateActivity(int VersionNumber, Microsoft.AspNetCore.Http.IFormCollection collection)
         {
-            var clientID = Environment.GetEnvironmentVariable("DISCORD_CLIENT_ID");
-            if (clientID == null)
+            //var clientID = Environment.GetEnvironmentVariable("DISCORD_CLIENT_ID");
+            string clientID = collection["ClientID"].ToString();
+            if (clientID == "")
             {
                 clientID = "418559331265675294";
                 clientID = "636181032353136640";
