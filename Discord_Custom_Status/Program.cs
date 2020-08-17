@@ -1,6 +1,6 @@
+using ElectronNET.API;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using ElectronNET.API;
 
 namespace Discord_Custom_Status
 {
@@ -15,8 +15,8 @@ namespace Discord_Custom_Status
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseElectron(args);
+                    webBuilder.UseElectron(args);
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

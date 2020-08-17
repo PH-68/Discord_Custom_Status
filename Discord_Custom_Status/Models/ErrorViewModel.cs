@@ -1,5 +1,3 @@
-using System;
-
 namespace Discord_Custom_Status.Models
 {
     public class ErrorViewModel

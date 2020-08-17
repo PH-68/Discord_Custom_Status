@@ -4,5 +4,107 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>If this not working anymore, try restart your discord.</p>
+    <form action="/Home/UpdateStatus" method="post" id="form">
+        <div class="form-group">
+            <label for="State">State</label>
+            <input type="text" class="form-control" id="State" name="State" />
+        </div>
+        <div class="form-group">
+            <label for="Details">Details </label>
+            <input type="text" class="form-control" id="Details" name="Details" />
+        </div>
+        <div class="form-group">
+            <label for="timeStart">timeStart </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button onclick="$('#timeStart').val(Date.now())" class="btn btn-outline-secondary" type="button">
+                        Use current time
+                    </button>
+                </div>
+                <input type="text" class="form-control" id="timeStart" name="timeStart" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="timeStart">timeEnd </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button onclick="$('#timeEnd').val(Date.now())" class="btn btn-outline-secondary" type="button">
+                        Use current time
+                    </button>
+                </div>
+                <input type="text" class="form-control" id="timeEnd" name="timeEnd" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="LargeImage">LargeImage  </label>
+            <input type="text" class="form-control" id="LargeImage" name="LargeImage" />
+        </div>
+        <div class="form-group">
+            <label for="LargeText">LargeText </label>
+            <input type="text" class="form-control" id="LargeText" name="LargeText" />
+        </div>
+        <div class="form-group">
+            <label for=" SmallImage"> SmallImage </label>
+            <input type="text" class="form-control" id=" SmallImage" name="SmallImage" />
+        </div>
+        <div class="form-group">
+            <label for="SmallText">SmallText  </label>
+            <input type="text" class="form-control" id="SmallText" name="SmallText" />
+        </div>
+        <div class="form-group form-check">
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="EnableParty" name="EnableParty" onclick="EnablePartyClicked()" />
+                <label class="custom-control-label" for="EnableParty">EnableParty</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="CurrentSize">Party Current Size default:1</label>
+            <input type="text" class="form-control" id="CurrentSize" name="CurrentSize" disabled />
+        </div>
+        <div class="form-group">
+            <label for="MaxSize">MaxSize default:1</label>
+            <input type="text" class="form-control" id="MaxSize" name="MaxSize" disabled />
+        </div>
+        <input type="button" name="submit" value="submit" onclick="onFormSubmit()" class="btn btn-success" />
+    </form>
 </div>
+<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
+    <div class="toast" style="position: absolute; top: 0; right: 0;" id="successToast">
+        <div class="toast-header">
+            <img src="data:image/png;base64,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" class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Success</strong>
+            <small>now</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Your request has been sent successfully.
+        </div>
+    </div>
+</div>
+@section scripts    {
+    <script>
+        function onFormSubmit() {
+            $.ajax({
+                url: "/Home/UpdateStatus",
+                type: 'post',
+                data: $('#form').serialize(),
+                success: function () {
+                    console.log("success")
+                    $('#successToast').toast('show')
+                }
+            });
+        }
+        function EnablePartyClicked() {
+            if ($("#EnableParty").prop("checked")) {
+                $("#MaxSize").prop("disabled", false);
+                $("#CurrentSize").prop("disabled", false);
+            } else {
+                $("#MaxSize").prop("disabled", true);
+                $("#CurrentSize").prop("disabled", true);
+            }
+        }
+    </script>
+}
